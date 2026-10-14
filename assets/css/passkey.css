@@ -1,0 +1,97 @@
+.passkey-page .passkey-register {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+    margin: 24px 0 30px;
+    padding: 24px 28px;
+    border: 1px solid #dce8e3;
+    border-left: 4px solid #26866f;
+    background: #f5f9f7;
+}
+
+.passkey-page .passkey-register-copy {
+    min-width: 0;
+}
+
+.passkey-page .passkey-eyebrow {
+    display: block;
+    margin-bottom: 6px;
+    color: #26715f;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.passkey-page .passkey-register h3,
+.passkey-page .passkey-list-heading h3 {
+    margin: 0;
+    color: #23352f;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.passkey-page .passkey-register-copy p,
+.passkey-page .passkey-list-heading p {
+    margin: 7px 0 0;
+    color: #687771;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.passkey-page .passkey-register-controls {
+    display: flex;
+    flex: 0 1 440px;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.passkey-page .passkey-register-controls input {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 140px;
+    height: 36px;
+    margin: 0;
+}
+
+.passkey-page .passkey-register-controls button {
+    flex: 0 0 auto;
+    white-space: nowrap;
+}
+
+.passkey-page .passkey-list-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+}
+
+.passkey-page .typecho-table-wrap {
+    overflow-x: auto;
+}
+
+.passkey-page .passkey-register-controls input:focus {
+    border-color: #26866f;
+    box-shadow: 0 0 0 2px rgba(38, 134, 111, 0.14);
+    outline: 0;
+}
+
+@media (max-width: 767px) {
+    .passkey-page .passkey-register {
+        align-items: stretch;
+        flex-direction: column;
+        gap: 18px;
+        margin-top: 16px;
+        padding: 20px;
+    }
+
+    .passkey-page .passkey-register-controls {
+        flex: 1 1 auto;
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .passkey-page .passkey-register-controls button {
+        width: 100%;
+    }
+}
