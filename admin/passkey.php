@@ -90,7 +90,7 @@ if (is_file($passkeyCssPath)) {
                                     <td><?php echo date('Y-m-d H:i:s', $pk['created_at']); ?></td>
                                     <td><?php echo $pk['last_used_at'] ? date('Y-m-d H:i:s', $pk['last_used_at']) : htmlspecialchars($messages['never_used'], ENT_QUOTES, 'UTF-8'); ?></td>
                                     <td>
-                                        <a href="#" onclick="renamePasskey(<?php echo (int)$pk['id']; ?>,<?php echo json_encode($pk['name'], JSON_HEX_TAG | JSON_HEX_APOS | JSON_HEX_AMP | JSON_HEX_QUOT); ?>);return false;"><?php echo htmlspecialchars($messages['rename'], ENT_QUOTES, 'UTF-8'); ?></a> | 
+                                        <a href="#" class="passkey-rename-link" data-passkey-id="<?php echo (int)$pk['id']; ?>" data-passkey-name="<?php echo htmlspecialchars($pk['name'] ?? '', ENT_QUOTES, 'UTF-8'); ?>"><?php echo htmlspecialchars($messages['rename'], ENT_QUOTES, 'UTF-8'); ?></a> | 
                                         <a href="#" onclick="delPasskey(<?php echo (int)$pk['id']; ?>);return false;" class="text-danger"><?php echo htmlspecialchars($messages['delete'], ENT_QUOTES, 'UTF-8'); ?></a>
                                     </td>
                                 </tr>
@@ -143,9 +143,28 @@ function delPasskey(id) {
     });
 }
 
+document.addEventListener('click', function(event) {
+    var target = event.target.closest('.passkey-rename-link');
+    if (!target) return;
+    event.preventDefault();
+    renamePasskey(Number(target.dataset.passkeyId), target.dataset.passkeyName || '');
+});
+
 function renamePasskey(id, name) {
-    var newName = prompt(passkeyText('rename_prompt'), name);
-    if (!newName) return;
+    var currentName = (typeof name === 'string') ? name : '';
+    var newName = prompt(passkeyText('rename_prompt'), currentName);
+    if (newName === null) return;
+
+    newName = newName.trim();
+    if (!newName) {
+        alert(passkeyText('empty_name'));
+        return;
+    }
+    if (newName.length > 50) {
+        alert(passkeyText('invalid_rename_length'));
+        return;
+    }
+
     fetch(renameUrl, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},

@@ -4,7 +4,7 @@
  * 
  * @package Passkey 
  * @author Jake Liu
- * @version 1.0.0
+ * @version 1.0.1
  * @link https://github.com/LittleJake/typecho-passkey
  */
 
